@@ -6,10 +6,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  String outpout = "0";
+
   Widget buildElement(String s) {
     return Expanded(
       child: OutlineButton(
-        child: Text(s,style: TextStyle(fontSize: 20.0),),
+        child: Text(
+          s,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            ),
+        ),
         onPressed: () {},
         textColor: Colors.white,
         padding: EdgeInsets.all(25.0),
@@ -26,6 +35,23 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: <Widget>[
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(
+              vertical : 24.0,
+              horizontal : 12.0,
+            ),
+            child: Text(
+              outpout,
+              style: TextStyle(
+                fontSize: 48.0,
+                  fontWeight: FontWeight.bold,
+              )
+              ),
+          ),
+          Expanded(
+            child: Container(),
+          ),
           Row(
             children: <Widget>[
               buildElement('7'),
