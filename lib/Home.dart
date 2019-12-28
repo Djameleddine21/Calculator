@@ -7,7 +7,49 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  String outpout = "0";
+  String output = "0";
+  String _output = "0";
+  String operand = "";
+  double num1 = 0.0;
+  double num2 = 0.0;
+  
+  buttonPressed(String s){
+    if(s=="CLEAR"){
+      setState(() {
+        _output = "0";
+        operand = "";
+        num1 = 0.0;
+        num2 = 0.0;
+      });
+    }
+    else if(s=="+" || s=="-" || s=="x" || s=="/"){
+      // case of operand 
+      operand = s;
+      num1 = double.parse(output);
+      _output = "0";
+    }
+    else if (s=="."){
+      if( ! _output.contains(".")) _output = _output + s; // concatination
+    }
+    else if(s=="="){
+      num2 = double.parse(output);
+      if(operand=="+") _output = (num1 + num2).toString();
+      if(operand=="-") _output = (num1 - num2).toString();
+      if(operand=="x") _output = (num1 * num2).toString();
+      if(operand=="/") _output = (num1 / num2).toString();
+      num1=0.0 ;
+      num2=0.0 ;
+      operand="";
+    }
+    else{
+      _output = _output + s ; 
+    }
+    print(_output);
+    setState(() {
+      output = double.parse(_output).toStringAsFixed(2);
+    });
+
+  }
 
   Widget buildElement(String s) {
     return Expanded(
@@ -19,9 +61,9 @@ class _HomeState extends State<Home> {
             fontWeight: FontWeight.bold,
             ),
         ),
-        onPressed: () {},
         textColor: Colors.white,
         padding: EdgeInsets.all(25.0),
+        onPressed:() => buttonPressed(s),
       ),
     );
   }
@@ -42,7 +84,7 @@ class _HomeState extends State<Home> {
               horizontal : 12.0,
             ),
             child: Text(
-              outpout,
+              output,
               style: TextStyle(
                 fontSize: 48.0,
                   fontWeight: FontWeight.bold,
