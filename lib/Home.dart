@@ -44,7 +44,6 @@ class _HomeState extends State<Home> {
     else{
       _output = _output + s ; 
     }
-    print(_output);
     setState(() {
       output = double.parse(_output).toStringAsFixed(2);
     });
